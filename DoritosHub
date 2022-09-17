@@ -1,3 +1,10 @@
+repeat wait() until game:IsLoaded()
+
+
+local PlaceId = game.PlaceId
+if PlaceId == 9417197334 then
+    
+end
 --Lib
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "Doritos Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
@@ -44,3 +51,6 @@ Tab:AddToggle({
         end
 	   
 })
+
+
+OrionLib:Init()
