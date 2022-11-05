@@ -90,8 +90,12 @@ end
 	function AutoFarmBoss2()
 		while _G.AutoFarmBoss == true do task.wait()
 		pcall(function()
-			moveto(getNPC().HumanoidRootPart.CFrame  + Vector3.new(0,9,0), 100)
-			Rotate3()
+			moveto(getNPC().HumanoidRootPart.CFrame  + Vector3.new(0,10,0), 100)
+			if Rengoku.Humanoid.Health <= 300 then
+				while task.wait() do
+					Rotate()
+				end
+			end
 		end)
 	end
 end
@@ -634,7 +638,7 @@ local tween = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, Twe
 
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "DoritosHubV2.27", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "DoritosHubV2.27", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroText = "DoritosHubV2.27"})
 local Player = game.Players.LocalPlayer
 if game.PlaceId == 5956785391 or 6152116144 then
 	getrenv()._G.handle_irregular = nil
