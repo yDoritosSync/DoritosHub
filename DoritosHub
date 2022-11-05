@@ -1,586 +1,932 @@
-repeat wait() until game:IsLoaded()
-local PlaceId = game.PlaceId
-
-if PlaceId == 6152116144 or PlaceId == 5956785391 then
+	--Values
+	_G.Settings = {
+		AutoBuy = true;
+		AutoDrop = true;
+		KillAura = true;
+		KillAura2 = true;
+		AutoFarmBoss = true;
+		Afb = true;
+        Afb2 = true;
+		Rotation33 = true;
+		Giyu = true;
+		AutoFarmGiyu = true;
+	 }
 	
-end
-
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Doritos Hub V.02", HidePremium = false, SaveConfig = true, ConfigFolder = "Doritos HubFolder", IntroText = "Doritos HubV.02",})
-
-OrionLib:MakeNotification({
-	Name = "Ui Is Loaded",
-	Content = "Go Get fun with the Script",
-	Image = "rbxassetid://6779643019",
-	Time = 5
-})
-
---LocalPlayerNamep
-
---Values
-
-_G.AutoBuy = true;
-_G.AutoDrop = true;
-_G.KillAura = true;
-_G.AutoFarm = true;
-_G.FarmBosses = true
---Local
-
-
---Functions
-function AutoDrop()
-	while _G.AutoDrop == true do
-
-local args = {
-    [1] = "transfer_money_to_money_bag",
-    [2] = game:GetService("Players").LocalPlayer,
-    [3] = game:GetService("ReplicatedStorage").Player_Data.yDoritosSync,
-    [4] = 50000
-}
-
-game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
-wait(0.0000000000000001)
-	end
 	
+--Locals
+
+local Rengoku = game:GetService("Workspace").Mobs.Bosses["Flame Trainee"].Renpeke
+local PlayerRotate = game.Players.LocalPlayer.Character.HumanoidRootPart
+_G.Afb = true
+
+
+function Rotate()
+	
+ PlayerRotate.CFrame = PlayerRotate.CFrame * CFrame.Angles(1890,0,0)
+ end
+
+ function Rotate3()
+	while task.wait() do
+		if Rengoku.Humanoid.Health <= 3000 then
+		   Rotate()
+		end
+		if Rengoku.Humanoid.Health == 10 then
+		elseif Rengoku.Humanoid.Health == 10 then
+		   if _G.Afb == true then
+			   break
+		   end
+	end  
+   end
 end
 
 
-
-function AutoBuy()
-	while _G.AutoBuy == true do
-	
-local args = {
-    [1] = {
-        ["Health Elixir"] = 220
-    },
-    [2] = 0,
-    [3] = 0
-}
-
-game:GetService("ReplicatedStorage").Sell_Items_tang:InvokeServer(unpack(args))
-wait(0.0000000000000001)
-	end
-	
-end
-
-
-
-function TeleportPlayer()
-	local teleport_table = {
-		location1 = Vector3.new(116.718018, 282.207642, -1633.20032, 0.997612059, 1.03819467e-07, -0.0690663308, -1.005128e-07, 1, 5.1351865e-08, 0.0690663308, -4.42871908e-08, 0.997612059), -- Primeiro Lugar
-		location2 = Vector3.new() -- Segundo Lugar
-	}
-	
-	local tween_s = game:GetService('TweenService')
-	local tweeninfo = TweenInfo.new(16,Enum.EasingStyle.Linear) --Delay do Teleport
-	
 	local lp = game.Players.LocalPlayer
-	
-	function bypass_teleport(v)
-		if lp.Character and 
-		lp.Character:FindFirstChild('HumanoidRootPart') then
-			local cf = CFrame.new(v)
-			local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
-			a:Play()
-			
+	local function getNPC()
+		local dist, thing = math.huge
+		for i,v in pairs(game:GetService("Workspace").Mobs.Bosses["Flame Trainee"]:GetChildren()) do
+			if v.Name == "Renpeke" then
+				local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).magnitude
+				if mag < dist then 
+					dist = mag 
+					thing = v 
+				end
+			end
 		end
+		return thing
 	end
+	 
+	local TweenService  = game:GetService("TweenService")
+	local noclipE       = false
+	local antifall      = false
 	
-	bypass_teleport(teleport_table.location1)
-	
-end
-
-function TeleportPlayer2()
-	local teleport_table = {
-		location1 = Vector3.new(-342.472687, 426.857788, -2394.25073, -0.999418259, 0, 0.0341055095, 0, 1.00000012, -0, -0.0341055095, 0, -0.999418259), -- Primeiro Lugar
-		location2 = Vector3.new() -- Segundo Lugar
-	}
-	
-	local tween_s = game:GetService('TweenService')
-	local tweeninfo = TweenInfo.new(16,Enum.EasingStyle.Linear) --Delay do Teleport
-	
-	local lp = game.Players.LocalPlayer
-	
-	function bypass_teleport(v)
-		if lp.Character and 
-		lp.Character:FindFirstChild('HumanoidRootPart') then
-			local cf = CFrame.new(v)
-			local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
-			a:Play()
-			
-		end
-	end
-	
-	bypass_teleport(teleport_table.location1)
-end
-
-function TeleportPlayer3()
-    local teleport_table = {
-		location1 = Vector3.new(4268.53809, 342.214478, -4184.73975, 0.999531806, 0, 0.0305974036, -0, 1, -0, -0.0305974036, 0, 0.999531806), -- Primeiro Lugar
-		location2 = Vector3.new() -- Segundo Lugar
-	}
-	
-	local tween_s = game:GetService('TweenService')
-	local tweeninfo = TweenInfo.new(16,Enum.EasingStyle.Linear) --Delay do Teleport
-	
-	local lp = game.Players.LocalPlayer
-	
-	function bypass_teleport(v)
-		if lp.Character and 
-		lp.Character:FindFirstChild('HumanoidRootPart') then
-			local cf = CFrame.new(v)
-			local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
-			a:Play()
-			
-		end
-	end
-	
-	bypass_teleport(teleport_table.location1)
-end
-
-
-function TeleportPlayer4()
-	local teleport_table = {
-		location1 = Vector3.new(3002.07764, 316.000519, -3861.73853, -0.997963428, 0, 0.0637900159, 0, 1.00000012, -0, -0.0637900233, 0, -0.997963309), -- Primeiro Lugar
-		location2 = Vector3.new() -- Segundo Lugar
-	}
-	
-	local tween_s = game:GetService('TweenService')
-	local tweeninfo = TweenInfo.new(16,Enum.EasingStyle.Linear) --Delay do Teleport
-	
-	local lp = game.Players.LocalPlayer
-	
-	function bypass_teleport(v)
-		if lp.Character and 
-		lp.Character:FindFirstChild('HumanoidRootPart') then
-			local cf = CFrame.new(v)
-			local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
-			a:Play()
-			
-		end
-	end
-	
-	bypass_teleport(teleport_table.location1)	
-end
-
-
-
-function BypassAntiCheat()
-	_G.cuasdamsndasdasd = function()
-		return
-	end
-	
-	getrenv().tick = function()
-		return 2000
-	end
-	
-	_G.handle_irregular = function()
-		return false
-	end
-	
-	repeat wait() until game:IsLoaded()
-	local skill_module = require(game:GetService("ReplicatedStorage").Modules.Server["Skills_Modules_Handler"])
-	
-	hookfunction(skill_module.Kick, function()
-		return nil
-	end);
-	
-	local anti_cheat1 = game:GetService("Players").LocalPlayer.PlayerScripts["Small_Scripts"]["Client_Global_utility"]
-	local anti_cheat2 = game:GetService("Players").LocalPlayer.PlayerScripts["Small_Scripts"]["client_global_delete_script"]
-	
-	hookfunction(anti_cheat1.GetPropertyChangedSignal, function()
-		return
-	end)
-	
-	hookfunction(anti_cheat2.GetPropertyChangedSignal, function()
-		return
-	end)
-	
-	anti_cheat1.Disabled = true
-	anti_cheat2.Disabled = true
-	
-	local Namecall
-	Namecall = hookmetamethod(game, '__namecall', function(self, ...)
-		local Args = {...}
-		local method = getnamecallmethod()
-		
-		if method == 'FireServer' and string.find(self.Name, 'mod') then 
-			return 
-		end
-		
-		if method == 'InvokeServer' and self.Name == 'reporthackerasdasd' then 
-			return 
-		end
-		
-		if method == 'FireServer' and self.Name == 'To_Server_commends' then 
-			return
-		end
-		
-		if method:lower() == 'kick' then 
-			return 
-		end
-		
-		return Namecall(self, ...)
-	end)
-	
-	local hook
-	hook = hookmetamethod(game, "__namecall", function(self, ...)
-	   args = {...}
-	
-	   if getnamecallmethod() == "FireServer" and #args == 2 and type(args[1]) == "boolean" then
-		   return task.wait(9e9)
-	   end
-	
-	   return hook(self, ...)
-	end)
-	
-	
-	
-	
-	
-	local client = game:GetService("Players").LocalPlayer
-	local user = client.Name
-	local TweenService = game:GetService("TweenService")
-	local noclipE = nil
-	local antifall = nil
-	
+	 
 	local function noclip()
 		for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
 			if v:IsA("BasePart") and v.CanCollide == true then
 				v.CanCollide = false
-				game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+				game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,10,0)
 			end
 		end
 	end
-	
+	 
 	local function moveto(obj, speed)
-		local info = TweenInfo.new(((client.Character.HumanoidRootPart.Position - obj.Position).Magnitude) / speed,Enum.EasingStyle.Linear)
-		local tween = TweenService:Create(client.Character.HumanoidRootPart, info, {CFrame = obj})
-		if not client.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-			antifall = Instance.new("BodyVelocity", client.Character.HumanoidRootPart)
-			antifall.Velocity = Vector3.new(0, 0, 0)
-			noclipE = game:GetService("RunService").Stepped:Connect(noclip) 
+		local info = TweenInfo.new(((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - obj.Position).Magnitude)/ speed,Enum.EasingStyle.Linear)
+		local tween = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, info, {CFrame = obj})
+	 
+		if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+			antifall = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.HumanoidRootPart)
+			antifall.Velocity = Vector3.new(0,0,0)
+			noclipE = game:GetService("RunService").Stepped:Connect(noclip)
 			tween:Play()
 		end
-	
+	 
 		tween.Completed:Connect(function()
 			antifall:Destroy()
 			noclipE:Disconnect()
 		end)
 	end
-end
 
-
-function TeleportPlayer5()
-
-	local teleport_table = {
-		location1 = Vector3.new(-90.0373688, 354.723511, -3170.00439, 0.817297578, -1.0121405e-08, 0.576215804, 3.12666586e-08, 1, -2.6782951e-08, -0.576215804, 3.99059843e-08, 0.817297578), -- Primeiro Lugar
-		location2 = Vector3.new() -- Segundo Lugar
-	}
-	
-	local tween_s = game:GetService('TweenService')
-	local tweeninfo = TweenInfo.new(16,Enum.EasingStyle.Linear) --Delay do Teleport
-	
-	local lp = game.Players.LocalPlayer
-	
-	function bypass_teleport(v)
-		if lp.Character and 
-		lp.Character:FindFirstChild('HumanoidRootPart') then
-			local cf = CFrame.new(v)
-			local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
-			a:Play()
-			
-		end
-	end
-	
-	bypass_teleport(teleport_table.location1)	
-end
-
-function TeleportPlayer6()
-
-	local teleport_table = {
-		location1 = Vector3.new(5258.51709, 365.857056, -2422.04443, 0.0163344685, -1.36483918e-08, -0.999866605, -6.17656548e-09, 1, -1.37511176e-08, 0.999866605, 6.40035847e-09, 0.0163344685), -- Primeiro Lugar
-		location2 = Vector3.new() -- Segundo Lugar
-	}
-	
-	local tween_s = game:GetService('TweenService')
-	local tweeninfo = TweenInfo.new(16,Enum.EasingStyle.Linear) --Delay do Teleport
-	
-	local lp = game.Players.LocalPlayer
-	
-	function bypass_teleport(v)
-		if lp.Character and 
-		lp.Character:FindFirstChild('HumanoidRootPart') then
-			local cf = CFrame.new(v)
-			local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
-			a:Play()
-			
-		end
-	end
-	
-	bypass_teleport(teleport_table.location1)	
-end
-
-function TeleportPlayer7()
-
-	local teleport_table = {
-		location1 = Vector3.new(689.451843, 261.933289, -2469.948, -0.990007997, -2.02267403e-09, -0.141011208, 3.4283596e-09, 1, -3.8413809e-08, 0.141011208, -3.85134129e-08, -0.990007997), -- Primeiro Lugar
-		location2 = Vector3.new() -- Segundo Lugar
-	}
-	
-	local tween_s = game:GetService('TweenService')
-	local tweeninfo = TweenInfo.new(16,Enum.EasingStyle.Linear) --Delay do Teleport
-	
-	local lp = game.Players.LocalPlayer
-	
-	function bypass_teleport(v)
-		if lp.Character and 
-		lp.Character:FindFirstChild('HumanoidRootPart') then
-			local cf = CFrame.new(v)
-			local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
-			a:Play()
-			
-		end
-	end
-	
-	bypass_teleport(teleport_table.location1)	
-end
-
-function KillAura()
-	while _G.KillAura == true do task.wait(1.2)
-	   local args = {
-		   [1] = "Sword_Combat_Slash",
-		   [2] = game:GetService("Players").LocalPlayer,
-		   [3] = game:GetService("Players").LocalPlayer.Character,
-		   [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-		   [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-		   [6] = 4
-	   }
-	   game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
-	   local args = {
-		   [1] = "Sword_Combat_Slash",
-		   [2] = game:GetService("Players").LocalPlayer,
-		   [3] = game:GetService("Players").LocalPlayer.Character,
-		   [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-		   [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-		   [6] = 4
-	   }
-	   game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
-	
-	   local args = {
-		   [1] = "Sword_Combat_Slash",
-		   [2] = game:GetService("Players").LocalPlayer,
-		   [3] = game:GetService("Players").LocalPlayer.Character,
-		   [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-		   [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-		   [6] = 4
-	   }
-	   game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
-	  
-	   local args = {
-		   [1] = "Sword_Combat_Slash",
-		   [2] = game:GetService("Players").LocalPlayer,
-		   [3] = game:GetService("Players").LocalPlayer.Character,
-		   [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-		   [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-		   [6] = 4
-	   }
-	   game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
 	 
-	   local args = {
-		   [1] = "Sword_Combat_Slash",
-		   [2] = game:GetService("Players").LocalPlayer,
-		   [3] = game:GetService("Players").LocalPlayer.Character,
-		   [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-		   [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-		   [6] = 4
-	   }
-	   local args = {
-		   [1] = "Sword_Combat_Slash",
-		   [2] = game:GetService("Players").LocalPlayer,
-		   [3] = game:GetService("Players").LocalPlayer.Character,
-		   [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-		   [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-		   [6] = 4
-	   }
-	   local args = {
-		   [1] = "Sword_Combat_Slash",
-		   [2] = game:GetService("Players").LocalPlayer,
-		   [3] = game:GetService("Players").LocalPlayer.Character,
-		   [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-		   [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-		   [6] = 4
-	   }
-	   local args = {
-		   [1] = "Sword_Combat_Slash",
-		   [2] = game:GetService("Players").LocalPlayer,
-		   [3] = game:GetService("Players").LocalPlayer.Character,
-		   [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-		   [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-		   [6] = 4
-	   }
-	   local args = {
-		   [1] = "Sword_Combat_Slash",
-		   [2] = game:GetService("Players").LocalPlayer,
-		   [3] = game:GetService("Players").LocalPlayer.Character,
-		   [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-		   [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-		   [6] = 4
-	   }
-print("KillAura Aura is Working")
+	function AutoFarmBoss2()
+		while _G.AutoFarmBoss == true do task.wait()
+		pcall(function()
+			moveto(getNPC().HumanoidRootPart.CFrame  + Vector3.new(0,9,0), 100)
+			Rotate3()
+		end)
 	end
 end
 
 
-function TeleportToMuzan()
-	local cframe = CFrame.new(game:GetService("Workspace").Muzan.SpawnPos.Value)
-local tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(20), {CFrame = cframe})                    
-tween:Play()
+
+	
+
+	
+	function AutoDrop()
+		while _G.AutoDrop == true do
+	
+			local args = {
+				[1] = "transfer_money_to_money_bag",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("ReplicatedStorage").Player_Data.yDoritosSync,
+				[4] = 50000
+			}
+	
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
+			wait(0.0000000000000001)
+		end
+	
+	end
+	
+	function AutoBuy()
+		while _G.AutoBuy == true do
+	
+			local args = {
+				[1] = {
+					["Health Elixir"] = 220
+				},
+				[2] = 0,
+				[3] = 0
+			}
+	
+			game:GetService("ReplicatedStorage").Sell_Items_tang:InvokeServer(unpack(args))
+			wait(0.0000000000000001)
+		end
+	
+	end
+	
+	function TeleportPlayer()
+		local teleport_table = {
+			location1 = Vector3.new(116.718018, 282.207642, -1633.20032, 0.997612059, 1.03819467e-07, -0.0690663308, -1.005128e-07
+				, 1, 5.1351865e-08, 0.0690663308, -4.42871908e-08, 0.997612059), -- Primeiro Lugar
+			location2 = Vector3.new() -- Segundo Lugar
+		}
+	
+		local tween_s = game:GetService('TweenService')
+		local tweeninfo = TweenInfo.new(16, Enum.EasingStyle.Linear) --Delay do Teleport
+	
+		local lp = game.Players.LocalPlayer
+	
+		local function noclip()
+			for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v:IsA("BasePart") and v.CanCollide == true then
+					v.CanCollide = false
+					game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+				end
+			end
+		end
+	
+		function bypass_teleport(v)
+			if lp.Character and
+				lp.Character:FindFirstChild('HumanoidRootPart') then
+				local cf = CFrame.new(v)
+				local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, { CFrame = cf })
+				a:Play()
+	
+			end
+		end
+	
+		bypass_teleport(teleport_table.location1)
+	
+	end
+	
+	function TeleportPlayer2()
+		local teleport_table = {
+			location1 = Vector3.new(-342.472687, 426.857788, -2394.25073, -0.999418259, 0, 0.0341055095, 0, 1.00000012, -0,
+			-0.0341055095, 0, -0.999418259), -- Primeiro Lugar
+			location2 = Vector3.new() -- Segundo Lugar
+		}
+	
+		local tween_s = game:GetService('TweenService')
+		local tweeninfo = TweenInfo.new(16, Enum.EasingStyle.Linear) --Delay do Teleport
+	
+		local lp = game.Players.LocalPlayer
+	
+		function bypass_teleport(v)
+			if lp.Character and
+				lp.Character:FindFirstChild('HumanoidRootPart') then
+				local cf = CFrame.new(v)
+				local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, { CFrame = cf })
+				a:Play()
+	
+			end
+		end
+	
+		bypass_teleport(teleport_table.location1)
+	end
+	
+	function TeleportPlayer3()
+		local teleport_table = {
+			location1 = Vector3.new(4268.53809, 342.214478, -4184.73975, 0.999531806, 0, 0.0305974036, -0, 1, -0, -0.0305974036, 0
+				, 0.999531806), -- Primeiro Lugar
+			location2 = Vector3.new() -- Segundo Lugar
+		}
+	
+		local tween_s = game:GetService('TweenService')
+		local tweeninfo = TweenInfo.new(16, Enum.EasingStyle.Linear) --Delay do Teleport
+	
+		local lp = game.Players.LocalPlayer
+	
+		function bypass_teleport(v)
+			if lp.Character and
+				lp.Character:FindFirstChild('HumanoidRootPart') then
+				local cf = CFrame.new(v)
+				local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, { CFrame = cf })
+				a:Play()
+	
+			end
+		end
+	
+		bypass_teleport(teleport_table.location1)
+	end
+	
+	function TeleportPlayer4()
+		local teleport_table = {
+			location1 = Vector3.new(3002.07764, 316.000519, -3861.73853, -0.997963428, 0, 0.0637900159, 0, 1.00000012, -0,
+				-0.0637900233, 0, -0.997963309), -- Primeiro Lugar
+			location2 = Vector3.new() -- Segundo Lugar
+		}
+	
+		local tween_s = game:GetService('TweenService')
+		local tweeninfo = TweenInfo.new(16, Enum.EasingStyle.Linear) --Delay do Teleport
+	
+		local lp = game.Players.LocalPlayer
+	
+		function bypass_teleport(v)
+			if lp.Character and
+				lp.Character:FindFirstChild('HumanoidRootPart') then
+				local cf = CFrame.new(v)
+				local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, { CFrame = cf })
+				a:Play()
+	
+			end
+		end
+	
+		bypass_teleport(teleport_table.location1)
+	end
+	
+	
+	
+	function TeleportPlayer5()
+	
+		local teleport_table = {
+			location1 = Vector3.new(-90.0373688, 354.723511, -3170.00439, 0.817297578, -1.0121405e-08, 0.576215804, 3.12666586e-08
+				, 1, -2.6782951e-08, -0.576215804, 3.99059843e-08, 0.817297578), -- Primeiro Lugar
+			location2 = Vector3.new() -- Segundo Lugar
+		}
+	
+		local tween_s = game:GetService('TweenService')
+		local tweeninfo = TweenInfo.new(16, Enum.EasingStyle.Linear) --Delay do Teleport
+	
+		local lp = game.Players.LocalPlayer
+	
+		function bypass_teleport(v)
+			if lp.Character and
+				lp.Character:FindFirstChild('HumanoidRootPart') then
+				local cf = CFrame.new(v)
+				local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, { CFrame = cf })
+				a:Play()
+	
+			end
+		end
+	
+		bypass_teleport(teleport_table.location1)
+	end
+	
+	function TeleportPlayer6()
+	
+		local teleport_table = {
+			location1 = Vector3.new(5258.51709, 365.857056, -2422.04443, 0.0163344685, -1.36483918e-08, -0.999866605,
+				-6.17656548e-09, 1, -1.37511176e-08, 0.999866605, 6.40035847e-09, 0.0163344685), -- Primeiro Lugar
+			location2 = Vector3.new() -- Segundo Lugar
+		}
+	
+		local tween_s = game:GetService('TweenService')
+		local tweeninfo = TweenInfo.new(16, Enum.EasingStyle.Linear) --Delay do Teleport
+	
+		local lp = game.Players.LocalPlayer
+	
+		function bypass_teleport(v)
+			if lp.Character and
+				lp.Character:FindFirstChild('HumanoidRootPart') then
+				local cf = CFrame.new(v)
+				local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, { CFrame = cf })
+				a:Play()
+	
+			end
+		end
+	
+		bypass_teleport(teleport_table.location1)
+	end
+	
+	function TeleportPlayer7()
+	
+		local teleport_table = {
+			location1 = Vector3.new(689.451843, 261.933289, -2469.948, -0.990007997, -2.02267403e-09, -0.141011208, 3.4283596e-09,
+				1, -3.8413809e-08, 0.141011208, -3.85134129e-08, -0.990007997), -- Primeiro Lugar
+			location2 = Vector3.new() -- Segundo Lugar
+		}
+	
+		local tween_s = game:GetService('TweenService')
+		local tweeninfo = TweenInfo.new(16, Enum.EasingStyle.Linear) --Delay do Teleport
+	
+		local lp = game.Players.LocalPlayer
+	
+		function bypass_teleport(v)
+			if lp.Character and
+				lp.Character:FindFirstChild('HumanoidRootPart') then
+				local cf = CFrame.new(v)
+				local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, { CFrame = cf })
+				a:Play()
+	
+			end
+		end
+	
+		bypass_teleport(teleport_table.location1)
+	end
+
+	function TeleportPlayerBossGiyu()
+		local teleport_table = {
+			location1 = Vector3.new(3026.23193, 317.109528, -2928.86914, -0.977029681, 0, -0.21310313, 0, 1, 0, 0.21310313, 0, -0.977029681), -- Primeiro Lugar
+			location2 = Vector3.new() -- Segundo Lugar
+		}
+	
+		local tween_s = game:GetService('TweenService')
+		local tweeninfo = TweenInfo.new(16, Enum.EasingStyle.Linear) --Delay do Teleport
+	
+		local lp = game.Players.LocalPlayer
+	
+		function bypass_teleport(v)
+			if lp.Character and
+				lp.Character:FindFirstChild('HumanoidRootPart') then
+				local cf = CFrame.new(v)
+				local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, { CFrame = cf })
+				a:Play()
+	
+			end
+		end
+	
+		bypass_teleport(teleport_table.location1)
+	end
+	
+
+	function TeleportPlayerRengoku()
+	
+		local teleport_table = {
+			location1 = Vector3.new(-1148.62866, 625.489563, -671.094116, -0.128778249, -3.39387825e-08, 0.99167341, -8.57678231e-08, 1, 2.30859811e-08, -0.99167341, -8.20807031e-08, -0.128778249), -- Primeiro Lugar
+			location2 = Vector3.new() -- Segundo Lugar
+		}
+	
+		local tween_s = game:GetService('TweenService')
+		local tweeninfo = TweenInfo.new(2, Enum.EasingStyle.Linear) --Delay do Teleport
+	
+		local lp = game.Players.LocalPlayer
+	
+		function bypass_teleport(v)
+			if lp.Character and
+				lp.Character:FindFirstChild('HumanoidRootPart') then
+				local cf = CFrame.new(v)
+				local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, { CFrame = cf })
+				a:Play()
+	
+			end
+		end
+	
+		bypass_teleport(teleport_table.location1)
+	end
+		
+	function KillAura()
+		while _G.KillAura == true do task.wait(1.4)
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+	
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+			
+	        task.wait(0.35)
+
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+
+			local args = {
+				[1] = "Sword_Combat_Slash",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 25
+			}
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+			
+			
+		end
+	end
+		
+	function TeleportToMuzan()
+		local cframe = CFrame.new(game:GetService("Workspace").Muzan.SpawnPos.Value)
+		local tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,
+			TweenInfo.new(20), { CFrame = cframe })
+		tween:Play()
+	end
+	
+	function RemoveSunDamage()
+		repeat wait() until game:IsLoaded()
+	
+		local Sun_Damage = game:GetService("StarterPlayer").StarterPlayerScripts["Small_Scripts"].Gameplay["Sun_Damage"]
+	
+		Sun_Damage.Disabled = true
+	
+	end
+	
+	function KillAura2()
+		while _G.KillAura2 == true do task.wait(1.6)
+	
+	
+			local args = {
+				[1] = "fist_combat",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 1
+			}
+	
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+	
+	
+			local args = {
+				[1] = "fist_combat",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 1
+			}
+	
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+	
+	
+			local args = {
+				[1] = "fist_combat",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 1
+			}
+	
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+	
+	
+			local args = {
+				[1] = "fist_combat",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 1
+			}
+	
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+			local args = {
+				[1] = "fist_combat",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 1
+			}
+	
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+	
+			local args = {
+				[1] = "fist_combat",
+				[2] = game:GetService("Players").LocalPlayer,
+				[3] = game:GetService("Players").LocalPlayer.Character,
+				[4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+				[5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+				[6] = 1
+			}
+	
+			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(unpack(args))
+			print("KillAura2 Working")
+	
+			if KillAura2 == false then
+				print("KillAura2 Off")
+	
+	
+	
+             end
+	end
+end	
+
+
+local TS = game:GetService("TweenService")
+local tween = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(6), {CFrame = CFrame.new(3030.76514, 374.17984, -2910.07739, 0.993621826, -2.80577357e-08, 0.112763852, 1.51450799e-08, 1, 1.15367236e-07, -0.112763852, -1.12923587e-07, 0.993621826)})
+
+
+
+	
+
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "DoritosHubV2.27", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Player = game.Players.LocalPlayer
+if game.PlaceId == 5956785391 or 6152116144 then
+	getrenv()._G.handle_irregular = nil
+getrenv()._G.cuasdamsndasdasd = nil
+
+_G.cuasdamsndasdasd = function()
+    return
 end
 
---Tab
+getrenv().tick = function()
+    return 2000
+end
 
+_G.handle_irregular = function()
+    return false
+end
 
-local AutoFarmTab = Window:MakeTab({
-	Name = "Auto Farm",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
+repeat wait() until game:IsLoaded()
+local skill_module = require(game:GetService("ReplicatedStorage").Modules.Server["Skills_Modules_Handler"])
 
+hookfunction(skill_module.Kick, function()
+    return nil
+end);
 
+local anti_cheat1 = game:GetService("StarterPlayer").StarterPlayerScripts["Small_Scripts"]["Client_Global_utility"]
+local anti_cheat2 = game:GetService("StarterPlayer").StarterPlayerScripts["Small_Scripts"]["client_global_delete_script"]
 
-local Tab = Window:MakeTab({
-	Name = "Money Tab",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
+hookfunction(anti_cheat1.GetPropertyChangedSignal, function()
+    return
+end)
 
-local TeleportTab = Window:MakeTab({
-	Name = "Teleport",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
+hookfunction(anti_cheat2.GetPropertyChangedSignal, function()
+    return
+end)
 
+anti_cheat1.Disabled = true
+anti_cheat2.Disabled = true
 
+local Namecall
+Namecall = hookmetamethod(game, '__namecall', function(self, ...)
+    local Args = {...}
+    local method = getnamecallmethod()
+    
+    if method == 'FireServer' and string.find(self.Name, 'mod') then 
+        return 
+    end
+    
+    if method == 'InvokeServer' and self.Name == 'reporthackerasdasd' then 
+        return 
+    end
+    
+    if method == 'FireServer' and self.Name == 'To_Server_commends' then 
+        return
+    end
+    
+    if method:lower() == 'kick' then 
+        return 
+    end
+    
+    return Namecall(self, ...)
+end)
 
+local hook
+hook = hookmetamethod(game, "__namecall", function(self, ...)
+   args = {...}
 
-local MiscTab = Window:MakeTab({
-	Name = "Misc",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
+   if getnamecallmethod() == "FireServer" and #args == 2 and type(args[1]) == "boolean" then
+       return task.wait(9e9)
+   end
 
-
---Toggles
-
-
-Tab:AddToggle({
-	Name = "Give me Money Bitch",
-	Default = false,
-	Callback = function(Value)
-	    _G.AutoBuy = Value
-		AutoBuy()
-	end    
-})
-
-
-Tab:AddToggle({
-	Name = "Drop Money Doritos-Kun",
-	Default = false,
-	Callback = function(Value)		
-	      _G.AutoDrop = Value
-		AutoDrop()
-	end    
-})
-
-
-local Section = TeleportTab:AddSection({
-	Name = "Places"
-})
-
-
-TeleportTab:AddButton({
-	Name = "Kiribating Village",
-	Callback = function()
-      	TeleportPlayer()
-  	end    
-})
-
-
-TeleportTab:AddButton({
-	Name = "Zapiwara Mountain",
-	Callback = function()
-      	TeleportPlayer2()
-  	end    
-})
-
-
-TeleportTab:AddButton({
-	Name = "Demon Slasher",
-	Callback = function()
-      	TeleportPlayer3()
-  	end    
-})
-
-
-TeleportTab:AddButton({
-	Name = "Butterfly Mansion",
-	Callback = function()
-      	TeleportPlayer4()
-  	end    
-})
+   return hook(self, ...)
+end)
+end if anti_cheat1 == Disabled then
+	OrionLib:MakeNotification({
+		Name = "User",
+		Content = "You Are Logged In As"..Player.Name.." ",
+		Image = "http://www.roblox.com/asset/?id=10947713416",
+		Time = 5
+	})
+	
+	OrionLib:MakeNotification({
+		Name = "Doritos Hub ",
+		Content = "DoritosHub has been injected",
+		Image = "http://www.roblox.com/asset/?id=10947713416",
+		Time = 6
+	})
+	 
+	OrionLib:MakeNotification({
+		Name = "DoritosHub",
+		Content = "Thank you for using DoritosHub ❤️",
+		Image = "http://www.roblox.com/asset/?id=10947713416",
+		Time = 8
+	})
+	
 
 
 
 
+	--Tab
+	
+	
+	local AutoFarmTab = Window:MakeTab({
+		Name = "Auto Farm",
+		Icon = "rbxassetid://4483345998",
+		PremiumOnly = false
+	})
+	
+	
+	
+	
+	
+	local Tab = Window:MakeTab({
+		Name = "Money Tab",
+		Icon = "rbxassetid://4483345998",
+		PremiumOnly = false
+	})
+	
+	local TeleportTab = Window:MakeTab({
+		Name = "Teleport",
+		Icon = "rbxassetid://4483345998",
+		PremiumOnly = false
+	})
+	
+	
+	
+	
+	local MiscTab = Window:MakeTab({
+		Name = "Misc",
+		Icon = "rbxassetid://4483345998",
+		PremiumOnly = false
+	})
+	
+	
+	--Buttons/Toggles.
+	
+	local Section = Tab:AddSection({
+		Name = "Money"
+	})
+	
+	Tab:AddToggle({
+		Name = "Give me Money Bitch",
+		Default = false,
+		Callback = function(Value)
+			_G.AutoBuy = Value
+			AutoBuy()
+		end
+	})
+	
+	
+	Tab:AddToggle({
+		Name = "Drop Money Doritos-Kun",
+		Default = false,
+		Callback = function(Value)
+			_G.AutoDrop = Value
+			AutoDrop()
+		end
+	})
+	
+	
+	local Section = TeleportTab:AddSection({
+		Name = "Places"
+	})
+	
+	
+	TeleportTab:AddButton({
+		Name = "Kiribating Village",
+		Callback = function()
+			TeleportPlayer()
+		end
+	})
+	
+	
+	TeleportTab:AddButton({
+		Name = "Zapiwara Mountain",
+		Callback = function()
+			TeleportPlayer2()
+		end
+	})
+	
+	
+	
+	
+	TeleportTab:AddButton({
+		Name = "Demon Slasher",
+		Callback = function()
+			TeleportPlayer3()
+		end
+	})
+	
+	
+	TeleportTab:AddButton({
+		Name = "Butterfly Mansion",
+		Callback = function()
+			TeleportPlayer4()
+		end
+	})
+	
+	
+	local Section = MiscTab:AddSection({
+		Name = "Anti-Cheat"
+	})
+	
+	
+	
+	TeleportTab:AddButton({
+		Name = "Ushumaru Village",
+		Callback = function()
+			TeleportPlayer5()
+		end
+	})
+	
+	TeleportTab:AddButton({
+		Name = "Final Selection",
+		Callback = function()
+			TeleportPlayer6()
+		end
+	})
+	
+	
+	TeleportTab:AddButton({
+		Name = "Waroru Cave",
+		Callback = function()
+			TeleportPlayer7()
+		end
+	})
+	
+	local Section = AutoFarmTab:AddSection({
+		Name = "KillAura"
+	})
+	
+	AutoFarmTab:AddLabel("Only use 1 KillAura")
+	
+	AutoFarmTab:AddToggle({
+		Name = "🌀 KillAura (Sword)",
+		Default = false,
+		Callback = function(Value)
+			_G.KillAura = Value
+			KillAura()
+		end
+	})
+	
+	AutoFarmTab:AddToggle({
+		Name = "🌀 KillAura Combat",
+		Default = false,
+		Callback = function(Value)
+			_G.KillAura2 = Value
+			KillAura2()
+		end
+	})
+	
+	
+	
+	
+	local Section = AutoFarmTab:AddSection({
+		Name = "AutoFarm"
+	})
+	
+	
+	
+	
+	
+	TeleportTab:AddButton({
+		Name = "Teleport to Muzan",
+		Callback = function()
+			TeleportToMuzan()
+		end
+	})
+	
+	local Section = MiscTab:AddSection({
+		Name = "LocalPlayer"
+	})
+	
+	AutoFarmTab:AddToggle({
+		Name = "AutoFarm Rengoku",
+		Default = false,
+		Callback = function(Value)
+			_G.AutoFarmBoss = Value
+			AutoFarmBoss2()
+		end    
+	})
 
-MiscTab:AddButton({
-	Name = "BypassAntiCheat",
-	Callback = function()
-      	BypassAntiCheat()
-  	end    
-})
+	AutoFarmTab:AddToggle({
+		Name = "This is a toggle!",
+		Default = false,
+		Callback = function(Value)
+			print("Destroy")
+		end    
+	})
 
-TeleportTab:AddButton({
-	Name = "Ushumaru Village",
-	Callback = function()
-      	TeleportPlayer5()
-  	end    
-})
-
-TeleportTab:AddButton({
-	Name = "Final Selection",
-	Callback = function()
-      	TeleportPlayer6()
-  	end    
-})
-
-
-TeleportTab:AddButton({
-	Name = "Waroru Cave",
-	Callback = function()
-      	TeleportPlayer7()
-  	end    
-})
-
-AutoFarmTab:AddToggle({
-	Name = "KillAura Work in Sword Only",
-	Default = false,
-	Callback = function(Value)
-		_G.KillAura = Value
-		KillAura()
-	end    
-})
-
-
-TeleportTab:AddButton({
-	Name = "Teleport to Muzan",
-	Callback = function()
-      	TeleportToMuzan()
-  	end    
-})
+	
+	OrionLib:Init()
+end
 
 
 
-
-OrionLib:Init()
