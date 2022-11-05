@@ -91,14 +91,10 @@ end
 		while _G.AutoFarmBoss == true do task.wait()
 		pcall(function()
 			moveto(getNPC().HumanoidRootPart.CFrame  + Vector3.new(0,10,0), 100)
-			if Rengoku.Humanoid.Health <= 300 then
-				while task.wait() do
-					Rotate()
-				end
-			end
 		end)
 	end
 end
+
 
 
 
