@@ -10,14 +10,44 @@
 		Rotation33 = true;
 		Giyu = true;
 		AutoFarmGiyu = true;
+		KeyMove = true;
+		SpinBD = true;
 	 }
 	
 	
 --Locals
 
-local Rengoku = game:GetService("Workspace").Mobs.Bosses["Flame Trainee"].Renpeke
-local PlayerRotate = game.Players.LocalPlayer.Character.HumanoidRootPart
-_G.Afb = true
+
+
+
+
+function TeleportSafe()
+	local teleport_table = {
+		location1 = Vector3.new(-1140.55151, 625.489563, -648.869873, -0.0198883228, -6.59708519e-08, 0.999802232, 4.15481658e-08, 1, 6.68103866e-08, -0.999802232, 4.28686953e-08, -0.0198883228), -- Primeiro Lugar
+		location2 = Vector3.new() -- Segundo Lugar
+	}
+
+	local tween_s = game:GetService('TweenService')
+	local tweeninfo = TweenInfo.new(29, Enum.EasingStyle.Linear) --Delay do Teleport
+
+	local lp = game.Players.LocalPlayer
+
+	function bypass_teleport(v)
+		if lp.Character and
+			lp.Character:FindFirstChild('HumanoidRootPart') then
+			local cf = CFrame.new(v)
+			local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, { CFrame = cf })
+			a:Play()
+
+		end
+	end
+
+	bypass_teleport(teleport_table.location1)
+end
+
+
+
+
 
 
 function Rotate()
@@ -25,6 +55,12 @@ function Rotate()
  PlayerRotate.CFrame = PlayerRotate.CFrame * CFrame.Angles(1890,0,0)
  end
 
+
+ function Rotate4()
+	while task.wait() do
+		Rotate()
+	end
+ end
  function Rotate3()
 	while task.wait() do
 		if Rengoku.Humanoid.Health <= 3000 then
@@ -41,7 +77,7 @@ end
 
 
 	local lp = game.Players.LocalPlayer
-	local function getNPC()
+	 function getNPC()
 		local dist, thing = math.huge
 		for i,v in pairs(game:GetService("Workspace").Mobs.Bosses["Flame Trainee"]:GetChildren()) do
 			if v.Name == "Renpeke" then
@@ -86,19 +122,120 @@ end
 		end)
 	end
 
+	local lp = game.Players.LocalPlayer
+	  function getNPC2()
+		local dist, thing = math.huge
+		for i,v in pairs(game:GetService("Workspace").Mobs.Bosses.Rengoku:GetChildren()) do
+			if v.Name == "Rengoku" then
+				local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).magnitude
+				if mag < dist then 
+					dist = mag 
+					thing = v 
+				end
+			end
+		end
+		return thing
+	end
+
+	local lp = game.Players.LocalPlayer
+	function getNPC3()
+	  local dist, thing = math.huge
+	  for i,v in pairs(game:GetService("Workspace").Mobs.Bosses.Muichiro:GetChildren()) do
+		  if v.Name == "Muichiro Tokito" then
+			  local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).magnitude
+			  if mag < dist then 
+				  dist = mag 
+				  thing = v 
+			  end
+		  end
+	  end
+	  return thing
+  end
+
+
+  local lp = game.Players.LocalPlayer
+  function getNPC4()
+	local dist, thing = math.huge
+	for i,v in pairs(game:GetService("Workspace").Mobs.Bosses.Akaza:GetChildren()) do
+		if v.Name == "Akeza" then
+			local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).magnitude
+			if mag < dist then 
+				dist = mag 
+				thing = v 
+			end
+		end
+	end
+	return thing
+end
+
+
+local lp = game.Players.LocalPlayer
+local function getNPC()
+	local dist, thing = math.huge
+	for i,v in pairs(game:GetService("Workspace").Mobs.Bosses.Enmu:GetChildren()) do
+		if v.Name == "Renpeke" then
+			local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).magnitude
+			if mag < dist then 
+				dist = mag 
+				thing = v 
+			end
+		end
+	end
+	return thing
+end
+
+	local Rengoku = game:GetService("Workspace").Mobs.Bosses["Flame Trainee"].Renpeke
+
+
+local PlayerABC = game.Players.LocalPlayer.Character.HumanoidRootPart
+_G.Afb = true
+
+
+function Rotate()
+	
+ PlayerABC.CFrame = PlayerABC.CFrame * CFrame.Angles(1890,0,0)
+ end
+  
+
 	 
 	function AutoFarmBoss2()
 		while _G.AutoFarmBoss == true do task.wait()
 		pcall(function()
 			moveto(getNPC().HumanoidRootPart.CFrame  + Vector3.new(0,10,0), 100)
-		end)
-	end
+		           if Rengoku.Humanoid.Health <= 10 or 20 or 30 then
+					TeleportSafe()
+				   end
+			end) 
+		   end
+		end
+
+
+
+
+function AutoFarmBoss4()
+	while _G.AutoFarmBoss == true do task.wait()
+	pcall(function()
+		moveto(getNPC2().HumanoidRootPart.CFrame  + Vector3.new(0,10,0), 100)
+	end)
+end
 end
 
 
+function AutoFarmBoss5()
+	while _G.AutoFarmBoss == true do task.wait()
+	pcall(function()
+		moveto(getNPC3().HumanoidRootPart.CFrame  + Vector3.new(0,10,0), 100)
+		end) 
+	   end
+	end
 
-
-	
+	function AutoFarmBoss6()
+		while _G.AutoFarmBoss == true do task.wait()
+		pcall(function()
+			moveto(getNPC4().HumanoidRootPart.CFrame  + Vector3.new(0,10,0), 100)	
+			end) 
+		   end
+		end
 
 	
 	function AutoDrop()
@@ -108,7 +245,7 @@ end
 				[1] = "transfer_money_to_money_bag",
 				[2] = game:GetService("Players").LocalPlayer,
 				[3] = game:GetService("ReplicatedStorage").Player_Data.yDoritosSync,
-				[4] = 50000
+				[4] = 75000
 			}
 	
 			game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
@@ -625,10 +762,6 @@ end
 end	
 
 
-local TS = game:GetService("TweenService")
-local tween = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(6), {CFrame = CFrame.new(3030.76514, 374.17984, -2910.07739, 0.993621826, -2.80577357e-08, 0.112763852, 1.51450799e-08, 1, 1.15367236e-07, -0.112763852, -1.12923587e-07, 0.993621826)})
-
-
 
 	
 
@@ -865,7 +998,6 @@ end if anti_cheat1 == Disabled then
 		Name = "KillAura"
 	})
 	
-	AutoFarmTab:AddLabel("Only use 1 KillAura")
 	
 	AutoFarmTab:AddToggle({
 		Name = "🌀 KillAura (Sword)",
@@ -876,26 +1008,12 @@ end if anti_cheat1 == Disabled then
 		end
 	})
 	
-	AutoFarmTab:AddToggle({
-		Name = "🌀 KillAura Combat",
-		Default = false,
-		Callback = function(Value)
-			_G.KillAura2 = Value
-			KillAura2()
-		end
-	})
-	
-	
-	
+
 	
 	local Section = AutoFarmTab:AddSection({
 		Name = "AutoFarm"
 	})
-	
-	
-	
-	
-	
+			
 	TeleportTab:AddButton({
 		Name = "Teleport to Muzan",
 		Callback = function()
@@ -908,7 +1026,7 @@ end if anti_cheat1 == Disabled then
 	})
 	
 	AutoFarmTab:AddToggle({
-		Name = "AutoFarm Rengoku",
+		Name = "AutoFarm Rengoku(Fake)",
 		Default = false,
 		Callback = function(Value)
 			_G.AutoFarmBoss = Value
@@ -916,17 +1034,57 @@ end if anti_cheat1 == Disabled then
 		end    
 	})
 
+
+
 	AutoFarmTab:AddToggle({
-		Name = "This is a toggle!",
+		Name = "AutoFarm Rengoku(True)",
 		Default = false,
 		Callback = function(Value)
-			print("Destroy")
+			_G.AutoFarmBoss = Value
+			AutoFarmBoss4()
 		end    
 	})
 
-	
+
+	AutoFarmTab:AddToggle({
+		Name = "Auto Farm Tokito",
+		Default = false,
+		Callback = function(Value)
+			_G.AutoFarmBoss = Value
+			AutoFarmBoss5()
+		end    
+	})
+
+	AutoFarmTab:AddToggle({
+		Name = "AutoFarm Akaza",
+		Default = false,
+		Callback = function(Value)
+			_G.AutoFarmBoss = Value
+			AutoFarmBoss6()
+		end    
+	})
+
+	AutoFarmTab:AddButton({
+	Name = "Infinite Stamina and Breath!",
+	Callback = function()
+		getgenv().InfiniteStuff = true
+
+		local Client = game:GetService("Players").LocalPlayer
+		local PlayerValues = game:GetService("ReplicatedStorage").PlayerValues[Client.Name]
+		local Stamina, Breath = PlayerValues.Stamina, PlayerValues.Breath
+		
+		OldNewIndex = hookmetamethod(game, "__newindex", function(self, index, value)
+			if InfiniteStuff and checkcaller() == false then
+				if (self == Stamina or self == Breath) and index == "Value" then
+					value = 115
+				end
+			end
+			return OldNewIndex(self, index, value)
+		end)
+  	end    
+})
+
+
+
 	OrionLib:Init()
 end
-
-
-
