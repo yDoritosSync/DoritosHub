@@ -98,13 +98,15 @@ end if anti_cheat1 == Disabled and anti_cheat2 == Disabled then
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "Doritos Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroText = "DoritosHubV2"})
 
-
-
 --Values
 _G.KillAura = true
 _G.AutoFarm = true
 _G.AutoFarm2 = true
 _G.Repeat = true
+_G.AutoLoot = true
+
+--Locals
+local TS = game:GetService("TweenService")
 
 
 
@@ -157,24 +159,13 @@ local args = {
     [3] = game:GetService("Players").LocalPlayer.Character,
     [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
     [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-    [6] = 2,
-    [9] = 100
-}
-
-game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
-
-
-local args = {
-    [1] = "Sword_Combat_Slash",
-    [2] = game:GetService("Players").LocalPlayer,
-    [3] = game:GetService("Players").LocalPlayer.Character,
-    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
     [6] = 3,
     [9] = 100
 }
 
 game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
+
+
 local args = {
     [1] = "Sword_Combat_Slash",
     [2] = game:GetService("Players").LocalPlayer,
@@ -208,85 +199,6 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
-local args = {
-    [1] = "Sword_Combat_Slash",
-    [2] = game:GetService("Players").LocalPlayer,
-    [3] = game:GetService("Players").LocalPlayer.Character,
-    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-    [6] = 6,
-    [9] = 1000
-}
-
-game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
-local args = {
-    [1] = "Sword_Combat_Slash",
-    [2] = game:GetService("Players").LocalPlayer,
-    [3] = game:GetService("Players").LocalPlayer.Character,
-    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-    [6] = 6,
-    [9] = 100
-}
-
-game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
-local args = {
-    [1] = "Sword_Combat_Slash",
-    [2] = game:GetService("Players").LocalPlayer,
-    [3] = game:GetService("Players").LocalPlayer.Character,
-    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-    [6] = 7,
-    [9] = 100
-}
-
-game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
-local args = {
-    [1] = "Sword_Combat_Slash",
-    [2] = game:GetService("Players").LocalPlayer,
-    [3] = game:GetService("Players").LocalPlayer.Character,
-    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-    [6] = 8,
-    [9] = 100
-}
-
-game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
-local args = {
-    [1] = "Sword_Combat_Slash",
-    [2] = game:GetService("Players").LocalPlayer,
-    [3] = game:GetService("Players").LocalPlayer.Character,
-    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-    [6] = 9,
-    [9] = 100
-}
-
-game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
-local args = {
-    [1] = "Sword_Combat_Slash",
-    [2] = game:GetService("Players").LocalPlayer,
-    [3] = game:GetService("Players").LocalPlayer.Character,
-    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-    [6] = 9,
-    [9] = 100
-}
-
-game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
-local args = {
-    [1] = "Sword_Combat_Slash",
-    [2] = game:GetService("Players").LocalPlayer,
-    [3] = game:GetService("Players").LocalPlayer.Character,
-    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
-    [6] = 10,
-    [9] = 1000
-}
-
-game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
-
-
 	end
 end
 
@@ -297,15 +209,17 @@ function AutoFarm()
     pcall(function()
         repeat task.wait()
             while _G.AutoFarm == true do task.wait()   
+               local tween5 = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(16), {CFrame = CFrame.new(4562.95751953125, 725.3660888671875, -590.9823608398438)})
+                tween5:Play()
+                tween5.Completed:Wait(1) task.wait(2)
                 for i,v in pairs(game:GetService("Workspace").Mobs.Bosses.Muichiro:GetChildren()) do
                 if v.Name == "Muichiro Tokito" then
                     while _G.AutoFarm == true do task.wait()
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,10,0)  * CFrame.Angles(math.rad(270), 0, 0)
                     if v.Humanoid.Health <= 0 then
-                      local TS = game:GetService("TweenService")
                       local tween = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(16), {CFrame = CFrame.new(1642.9918212890625, 299.98095703125, -329.4827575683594)})
                         tween:Play()
-                        tween.Completed:Wait(5) task.wait(3)
+                        tween.Completed:Wait(1) task.wait(2)
                        for i,v2 in pairs(game:GetService("Workspace").Mobs.Bosses.Inosuke:GetChildren()) do 
                         if v2.Name == "Inosuke" then
                             while _G.AutoFarm == true do task.wait()
@@ -313,7 +227,7 @@ function AutoFarm()
                         if v2.Humanoid.Health <= 0 then
                            local tween2 = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(16), {CFrame = CFrame.new(-1136.98193359375, 625.4895629882812, -632.75048828125)})
                            tween2:Play()
-                           tween2.Completed:Wait(5) task.wait(3)
+                           tween2.Completed:Wait(1) task.wait(2)
                          for i,v3 in pairs(game:GetService("Workspace").Mobs.Bosses["Flame Trainee"]:GetChildren()) do 
                             if v3.Name == "Renpeke" then
                                 while _G.AutoFarm == true do task.wait()
@@ -346,14 +260,90 @@ function AutoFarm2()
             AutoFarm()
         end)
     end 
-end         
+end 
 
-
-local Mobs = game:GetService("Workspace").Mobs.Bosses:GetChildren()
-local MobsTable = {}
-for i,v in pairs(Mobs) do
-    table.insert(MobsTable, v.Name)
+function AutoLoot()
+  repeat task.wait()
+    while _G.AutoLoot == true do task.wait()
+        local args = {
+            [1] = "Health Elixir"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Stamina Elixir"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Jumbo Health Elixir"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Jumbo Health Regen Elixir"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Health Regen Elixir"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Jumbo Stamina Elixir"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Ore"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Inosuke Bottom"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Mist Katana"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Flame Katana"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Beast Katanas"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Insect Katana"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Scythe"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+    end
+  until _G.AutoLoot == false
 end
+
+
+function AutoLoot2()
+    while _G.AutoLoot do task.wait()
+        pcall(function()
+            AutoLoot()
+        end)
+end
+end
+
+
 
 
 
@@ -382,13 +372,15 @@ Tab:AddToggle({
 	end    
 })
 
-Tab:AddDropdown({
-	Name = "Bosses Dropdown",
-	Default = "",
-	Options = MobsTable,
-	Callback = function(Value)
 
+Tab:AddToggle({
+	Name = "AutoLoot!",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoLoot = Value
+        AutoLoot2()
 	end    
 })
+
 
 end
