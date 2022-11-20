@@ -199,6 +199,66 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
+local args = {
+    [1] = "Sword_Combat_Slash",
+    [2] = game:GetService("Players").LocalPlayer,
+    [3] = game:GetService("Players").LocalPlayer.Character,
+    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+    [6] = 6,
+    [9] = 99999
+}
+game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
+local args = {
+    [1] = "Sword_Combat_Slash",
+    [2] = game:GetService("Players").LocalPlayer,
+    [3] = game:GetService("Players").LocalPlayer.Character,
+    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+    [6] = 7,
+    [9] = 99999
+}
+game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
+local args = {
+    [1] = "Sword_Combat_Slash",
+    [2] = game:GetService("Players").LocalPlayer,
+    [3] = game:GetService("Players").LocalPlayer.Character,
+    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+    [6] = 8,
+    [9] = 99999
+}
+game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
+local args = {
+    [1] = "Sword_Combat_Slash",
+    [2] = game:GetService("Players").LocalPlayer,
+    [3] = game:GetService("Players").LocalPlayer.Character,
+    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+    [6] = 9,
+    [9] = 99999
+}
+game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
+local args = {
+    [1] = "Sword_Combat_Slash",
+    [2] = game:GetService("Players").LocalPlayer,
+    [3] = game:GetService("Players").LocalPlayer.Character,
+    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+    [6] = 9,
+    [9] = 99999
+}
+game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
+local args = {
+    [1] = "Sword_Combat_Slash",
+    [2] = game:GetService("Players").LocalPlayer,
+    [3] = game:GetService("Players").LocalPlayer.Character,
+    [4] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+    [5] = game:GetService("Players").LocalPlayer.Character.Humanoid,
+    [6] = 10,
+    [9] = 99999
+}
+game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(unpack(args))
 	end
 end
 
@@ -215,7 +275,7 @@ function AutoFarm()
                 for i,v in pairs(game:GetService("Workspace").Mobs.Bosses.Muichiro:GetChildren()) do
                 if v.Name == "Muichiro Tokito" then
                     while _G.AutoFarm == true do task.wait()
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,10,0)  * CFrame.Angles(math.rad(270), 0, 0)
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,10.25,0)  * CFrame.Angles(math.rad(270), 0, 0)
                     if v.Humanoid.Health <= 0 then
                       local tween = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(16), {CFrame = CFrame.new(1642.9918212890625, 299.98095703125, -329.4827575683594)})
                         tween:Play()
@@ -233,9 +293,30 @@ function AutoFarm()
                                 while _G.AutoFarm == true do task.wait()
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v3.HumanoidRootPart.CFrame * CFrame.new(0,10,0)  * CFrame.Angles(math.rad(270), 0, 0)    
                                if v3.Humanoid.Health <=0 then
-                                local tween3 = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(16), {CFrame = CFrame.new(4395.2900390625, 675.1206665039062, -642.2671508789062)})
-                                tween3:Play()
-                                tween3.Completed:Wait(5)
+                                if game:GetService("Workspace").DayNNight.Value <18 then
+                                    local tween4 = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(16), {CFrame = CFrame.new(1563.49658203125, 573.1204833984375, -557.353271484375)})
+                                   tween4:Play()
+                                   tween4.Completed:Wait(1) task.wait()
+                                    for i,v4 in pairs(game:GetService("Workspace").Mobs.Bosses.Enmu:GetChildren()) do
+                                    while _G.AutoFarm == true do task.wait()
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v4.Humanoid.CFrame * CFrame.new(0,10,0) * CFrame.Angles(math.rad(270),0,0)
+                                       if v3.Humanoid.Health <0 then
+                                        local tween6 = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(16), {CFrame = CFrame.new(1563.49658203125, 573.1204833984375, -557.353271484375)})
+                                         if game:GetService("Workspace").DayNNight.Value >=18 then
+                                            for i,v5 in pairs(game:GetService("Workspace").Mobs.Bosses.Swampy:GetChildren()) do
+                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v5.Humanoid.CFrame * CFrame.new(0,10,0) * CFrame.Angles(math.rad(270),0,0)
+                                            end
+                                elseif game:GetService("Workspace").DayNNight.Value > 18 then
+                                    local tween3 = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(16), {CFrame = CFrame.new(4395.2900390625, 675.1206665039062, -642.2671508789062)})
+                                    tween3:Play()
+                                    tween3.Completed:Wait(1)
+                                end 
+                                         end
+                                       end
+                                    
+                                    end
+                                   end
+                                end
                                     end
                                 end
                             end
@@ -248,10 +329,10 @@ function AutoFarm()
                     end
                 end
             end
-        end  
         until _G.AutoFarm == false or _G.AutoFarm ~= nil
     end)
 end
+
 
 
 function AutoFarm2()
@@ -327,6 +408,161 @@ function AutoLoot()
         workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
         local args = {
             [1] = "Scythe"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Striped Green Scarf"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Dream Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Thunder Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Rusty Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Flame Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Red Scarf"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Arrow Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Tamari Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Black Caped Scarf"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Mist Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Wind Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Brown Scarf"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Swamp Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Blood Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Water Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Reaper Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Butterfly Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Black Hooded Scarf"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Beast Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "White Scarf"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Shockwave Necklace"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Straw Hat"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Orenjibisuto Mask"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Fox Mask"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Akuma Kurenza Mask"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Yatagarasu Mask"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Panther Mask"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Hiretsuna Kitsune Mask"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Baar Head"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Akuma no ie Mask"
+        }
+        
+        workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Stylish Mask"
         }
         
         workspace.Debree.Loot_Chest.Add_To_Inventory:InvokeServer(unpack(args))
